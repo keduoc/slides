@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>slides</title>
+    <script src="//code.jquery.com/jquery-2.1.1.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="window">
+    <div class="images">
+        <img src="01.png" alt="图片1" width="400" height="300">
+        <img src="02.png" alt="图片2" width="400" height="300">
+        <img src="03.png" alt="图片3" width="400" height="300">
+        <img src="04.png" alt="图片4" width="400" height="300">
+    </div>
+</div>
+
+<script>
+    let n
+    initialize()
+
+    setInterval(()=>{
+        makeLeave(getImage(n))
+          .one('transitionend',(e)=>{
+        makeEnter($(e.currentTarget))
+        })
+    makeCurrent(getImage(n+1))
+        n += 1
+    },3000)
+
+
+    function initialize() {
+        n = 1
+        $(`.images > img:nth-child(${n})`).addClass('current').siblings().addClass('enter')
+    }
+
+    function x(n) {
+        if(n>4){
+            n = n%4
+            if(n === 0){
+                n =4
+            }
+        }  // n = 1 2 3 4
+        return n
+    }
+
+    function getImage(n) {
+        return $(`.images > img:nth-child(${x(n)})`)
+    }
+
+    function makeCurrent($node){
+        $node.removeClass('enter').addClass('current')
+        return $node
+    }
+
+    function makeLeave($node){
+        $node.removeClass('current').addClass('leave')
+        return $node
+    }
+
+    function makeEnter($node){
+        $node.removeClass('leave').addClass('enter')
+        return $node
+    }
+
+</script>
+
+</body>
+</html>

@@ -50,17 +50,17 @@
     }
 
     function makeCurrent($node){
-        $node.removeClass('enter').addClass('current')
+        $node.removeClass('enter leave').addClass('current')
         return $node
     }
 
     function makeLeave($node){
-        $node.removeClass('current').addClass('leave')
+        $node.removeClass('current enter').addClass('leave')
         return $node
     }
 
     function makeEnter($node){
-        $node.removeClass('leave').addClass('enter')
+        $node.removeClass('leave current').addClass('enter')
         return $node
     }
 
